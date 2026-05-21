@@ -39,6 +39,7 @@ export type Antibiotic = {
     standard: DosingRegimen
     renalAdjustment: RenalDosing[]
   }
+  description: string // 一言特徴
   sideEffects?: string[]
   monitoring?: string[]
   references: Reference[]
