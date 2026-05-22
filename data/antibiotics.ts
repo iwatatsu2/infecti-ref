@@ -52,8 +52,8 @@ export const antibiotics: Antibiotic[] = [
       standard: { dose: "4.5g", route: "IV", interval: "6-8時間毎" },
       renalAdjustment: [
         { gfrRange: "≥40", gfrMin: 40, gfrMax: 999, dose: "4.5g", interval: "6時間毎" },
-        { gfrRange: "20-39", gfrMin: 20, gfrMax: 39, dose: "4.5g", interval: "8時間毎" },
-        { gfrRange: "<20", gfrMin: 0, gfrMax: 19, dose: "2.25g", interval: "8時間毎" },
+        { gfrRange: "20-39", gfrMin: 20, gfrMax: 39, dose: "3.375g", interval: "6時間毎" },
+        { gfrRange: "<20", gfrMin: 0, gfrMax: 19, dose: "2.25g", interval: "6時間毎" },
         { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "2.25g", interval: "8時間毎（透析後追加0.75g）" },
       ],
     },
@@ -183,10 +183,10 @@ export const antibiotics: Antibiotic[] = [
       standard: { dose: "2g", route: "IV", interval: "8-12時間毎" },
       renalAdjustment: [
         { gfrRange: "≥60", gfrMin: 60, gfrMax: 999, dose: "2g", interval: "8時間毎" },
-        { gfrRange: "30-59", gfrMin: 30, gfrMax: 59, dose: "2g", interval: "12時間毎" },
-        { gfrRange: "11-29", gfrMin: 11, gfrMax: 29, dose: "1g", interval: "12時間毎" },
+        { gfrRange: "30-59", gfrMin: 30, gfrMax: 59, dose: "2g", interval: "24時間毎" },
+        { gfrRange: "11-29", gfrMin: 11, gfrMax: 29, dose: "2g", interval: "24時間毎" },
         { gfrRange: "≤10", gfrMin: 0, gfrMax: 10, dose: "1g", interval: "24時間毎" },
-        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "1g", interval: "透析後" },
+        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "1g", interval: "透析後（初日1g→以後500mg/日）" },
       ],
     },
     monitoring: ["セフェピム脳症に注意（特に腎機能低下時）"],
@@ -261,7 +261,7 @@ export const antibiotics: Antibiotic[] = [
     description: "MRSA治療の標準薬。TDM必須（AUC/MIC管理）。腎毒性に注意",
     spectrum: ["MRSA", "MSSA", "Enterococcus faecalis", "Enterococcus faecium", "Clostridioides difficile（経口のみ）", "Streptococcus pneumoniae（ペニシリン耐性）"],
     dosing: {
-      standard: { dose: "15-20mg/kg", route: "IV", interval: "8-12時間毎", note: "トラフ値 15-20μg/mL目標（AUC/MIC 400-600目標）" },
+      standard: { dose: "15-20mg/kg", route: "IV", interval: "8-12時間毎", note: "AUC/MIC 400-600目標（Bayesian法推奨。トラフ値単独監視は非推奨）" },
       renalAdjustment: [
         { gfrRange: "≥50", gfrMin: 50, gfrMax: 999, dose: "15-20mg/kg", interval: "8-12時間毎" },
         { gfrRange: "20-49", gfrMin: 20, gfrMax: 49, dose: "15-20mg/kg", interval: "24時間毎" },
@@ -269,7 +269,7 @@ export const antibiotics: Antibiotic[] = [
         { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "15-20mg/kg", interval: "透析後（トラフ値で調整）" },
       ],
     },
-    monitoring: ["TDM必須：AUC/MIC 400-600目標", "腎機能モニタリング", "Red man syndromeに注意（投与速度）"],
+    monitoring: ["TDM必須：AUC/MIC 400-600目標（2020年ガイドライン）", "腎機能モニタリング", "Red man syndromeに注意（投与速度1g/h以下）"],
     references: [
       { id: "ref-vcm-1", title: "抗菌薬TDMガイドライン2022", source: "TDMガイドライン 2022" },
       { id: "ref-vcm-2", title: "IDSA MRSA Guidelines 2011", source: "IDSA 2011" },
@@ -364,7 +364,7 @@ export const antibiotics: Antibiotic[] = [
     description: "非定型肺炎カバーの定番。3日間投与で7日間効果持続。CAP併用に",
     spectrum: ["Mycoplasma pneumoniae", "Chlamydophila pneumoniae", "Legionella pneumophila", "Haemophilus influenzae", "Moraxella catarrhalis"],
     dosing: {
-      standard: { dose: "500mg", route: "IV/PO", interval: "24時間毎", duration: "3-5日間" },
+      standard: { dose: "500mg→250mg", route: "IV/PO", interval: "24時間毎", duration: "初日500mg, 2日目以降250mg×4日間", note: "IV時は500mg/日" },
       renalAdjustment: [
         { gfrRange: "全段階", gfrMin: 0, gfrMax: 999, dose: "500mg", interval: "24時間毎（調整不要）" },
       ],
@@ -455,11 +455,11 @@ export const antibiotics: Antibiotic[] = [
     description: "MRSA菌血症・心内膜炎の代替。肺炎には使用不可（サーファクタントで不活化）",
     spectrum: ["MRSA", "VRE", "MSSA", "Enterococcus faecalis", "Enterococcus faecium"],
     dosing: {
-      standard: { dose: "6-10mg/kg", route: "IV", interval: "24時間毎", note: "心内膜炎: 8-10mg/kg, 菌血症: 6mg/kg" },
+      standard: { dose: "8-10mg/kg", route: "IV", interval: "24時間毎", note: "菌血症・心内膜炎ともに8-10mg/kg推奨" },
       renalAdjustment: [
-        { gfrRange: "≥30", gfrMin: 30, gfrMax: 999, dose: "6-10mg/kg", interval: "24時間毎" },
-        { gfrRange: "<30", gfrMin: 0, gfrMax: 29, dose: "6-10mg/kg", interval: "48時間毎" },
-        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "6-10mg/kg", interval: "48時間毎（透析後）" },
+        { gfrRange: "≥30", gfrMin: 30, gfrMax: 999, dose: "8-10mg/kg", interval: "24時間毎" },
+        { gfrRange: "<30", gfrMin: 0, gfrMax: 29, dose: "8-10mg/kg", interval: "48時間毎" },
+        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "8-10mg/kg", interval: "48時間毎（透析後）" },
       ],
     },
     monitoring: ["CPK毎週モニタリング", "肺炎には使用不可（サーファクタントで不活化）"],

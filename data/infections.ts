@@ -27,7 +27,7 @@ export const infections: Infection[] = [
         {
           antibioticId: "azm",
           antibioticName: "アジスロマイシン",
-          regimen: { dose: "500mg", route: "IV/PO", interval: "24時間毎", duration: "3-5日間", note: "非定型カバー併用" },
+          regimen: { dose: "500mg→250mg", route: "IV/PO", interval: "24時間毎", duration: "初日500mg, 2日目以降250mg（計5日間）", note: "非定型カバー併用" },
           referenceTag: "[IDSA/ATS 2019]",
         },
       ],
