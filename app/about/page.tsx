@@ -21,9 +21,7 @@ export default function AboutPage() {
 
       {/* Profile */}
       <div className="text-center mb-8">
-        <div className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl" style={{ background: "linear-gradient(135deg, #3b82f6, #8b5cf6)" }}>
-          🩺
-        </div>
+        <img src="/dr-iwatatsu.png" alt="Dr. いわたつ" className="w-20 h-20 rounded-full mx-auto mb-4 object-cover" />
         <h1 className="text-2xl font-bold text-white">Dr. いわたつ</h1>
         <p className="text-sm mt-1" style={{ color: "var(--text-muted)" }}>糖尿病・内分泌 専門医・指導医</p>
       </div>
