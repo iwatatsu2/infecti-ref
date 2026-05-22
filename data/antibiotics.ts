@@ -3,6 +3,25 @@ import { Antibiotic } from "@/types"
 export const antibiotics: Antibiotic[] = [
   // ===== ペニシリン系 =====
   {
+    id: "pcg",
+    name: "ペニシリンG",
+    genericName: "Benzylpenicillin (PCG)",
+    category: "ペニシリン系",
+    route: "IV",
+    description: "最も狭域のペニシリン。感受性肺炎球菌・連鎖球菌・髄膜炎菌に最適。IEの標的治療",
+    spectrum: ["Streptococcus pneumoniae（感受性）", "Streptococcus viridans group", "Neisseria meningitidis", "Treponema pallidum"],
+    dosing: {
+      standard: { dose: "2400万単位/日", route: "IV", interval: "4時間毎分割 or 持続投与", note: "IE: 1800-2400万単位/日" },
+      renalAdjustment: [
+        { gfrRange: "≥30", gfrMin: 30, gfrMax: 999, dose: "2400万単位/日", interval: "4時間毎分割" },
+        { gfrRange: "10-29", gfrMin: 10, gfrMax: 29, dose: "1200-1800万単位/日", interval: "4-6時間毎" },
+        { gfrRange: "<10", gfrMin: 0, gfrMax: 9, dose: "600-1200万単位/日", interval: "6時間毎" },
+        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "600万単位/日", interval: "6時間毎（透析後追加）" },
+      ],
+    },
+    references: [{ id: "ref-pcg-1", title: "注射用ペニシリンGカリウム添付文書", source: "添付文書" }],
+  },
+  {
     id: "abpc",
     name: "アンピシリン",
     genericName: "Ampicillin (ABPC)",
@@ -579,5 +598,80 @@ export const antibiotics: Antibiotic[] = [
     },
     monitoring: ["腎毒性（必発）", "神経毒性"],
     references: [{ id: "ref-col-1", title: "オルドレブ添付文書", source: "添付文書" }],
+  },
+
+  // ===== 経口薬（CAP外来・膀胱炎用） =====
+  {
+    id: "ampc",
+    name: "アモキシシリン",
+    genericName: "Amoxicillin (AMPC)",
+    category: "ペニシリン系",
+    route: "PO",
+    description: "経口ペニシリンの基本薬。肺炎球菌への第一選択（外来CAP）",
+    spectrum: ["Streptococcus pneumoniae", "Streptococcus pyogenes", "Haemophilus influenzae（一部）", "Enterococcus faecalis"],
+    dosing: {
+      standard: { dose: "500mg-1g", route: "PO", interval: "8時間毎", note: "高用量: 1g q8h（耐性肺炎球菌考慮時）" },
+      renalAdjustment: [
+        { gfrRange: "≥30", gfrMin: 30, gfrMax: 999, dose: "500mg-1g", interval: "8時間毎" },
+        { gfrRange: "10-29", gfrMin: 10, gfrMax: 29, dose: "500mg", interval: "12時間毎" },
+        { gfrRange: "<10", gfrMin: 0, gfrMax: 9, dose: "500mg", interval: "24時間毎" },
+        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "500mg", interval: "24時間毎（透析後追加）" },
+      ],
+    },
+    references: [{ id: "ref-ampc-1", title: "サワシリン添付文書", source: "添付文書" }],
+  },
+  {
+    id: "ampc-cva",
+    name: "アモキシシリン/クラブラン酸",
+    genericName: "Amoxicillin/Clavulanate (AMPC/CVA)",
+    category: "ペニシリン系",
+    route: "PO",
+    description: "経口でβラクタマーゼ産生菌をカバー。CAP外来（併存疾患あり）の選択肢",
+    spectrum: ["Streptococcus pneumoniae", "Haemophilus influenzae", "Moraxella catarrhalis", "MSSA", "E. coli（一部）", "嫌気性菌"],
+    dosing: {
+      standard: { dose: "1錠(250mg/125mg)", route: "PO", interval: "8時間毎", note: "高用量製剤なし（日本）。海外では875mg/125mg q12h" },
+      renalAdjustment: [
+        { gfrRange: "≥30", gfrMin: 30, gfrMax: 999, dose: "1錠", interval: "8時間毎" },
+        { gfrRange: "10-29", gfrMin: 10, gfrMax: 29, dose: "1錠", interval: "12時間毎" },
+        { gfrRange: "<10", gfrMin: 0, gfrMax: 9, dose: "1錠", interval: "24時間毎" },
+        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "1錠", interval: "24時間毎（透析後追加）" },
+      ],
+    },
+    references: [{ id: "ref-ampc-cva-1", title: "オーグメンチン添付文書", source: "添付文書" }],
+  },
+  {
+    id: "fosfomycin",
+    name: "ホスホマイシン",
+    genericName: "Fosfomycin (FOM)",
+    category: "その他",
+    route: "PO",
+    description: "単純性膀胱炎の単回投与治療。耐性菌リスクが低い",
+    spectrum: ["E. coli", "Enterococcus faecalis", "Klebsiella spp.（一部）"],
+    dosing: {
+      standard: { dose: "3g", route: "PO", interval: "単回投与", note: "単純性膀胱炎: 3g単回" },
+      renalAdjustment: [
+        { gfrRange: "≥10", gfrMin: 10, gfrMax: 999, dose: "3g", interval: "単回投与（調整不要）" },
+        { gfrRange: "<10", gfrMin: 0, gfrMax: 9, dose: "3g", interval: "単回投与（調整不要）" },
+        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "3g", interval: "単回投与（透析で除去されるため透析後投与）" },
+      ],
+    },
+    references: [{ id: "ref-fom-1", title: "ホスミシン添付文書", source: "添付文書" }, { id: "ref-fom-2", title: "IDSA Uncomplicated UTI Guideline 2011", source: "IDSA 2011" }],
+  },
+  {
+    id: "doxy",
+    name: "ドキシサイクリン",
+    genericName: "Doxycycline (DOXY)",
+    category: "テトラサイクリン系",
+    route: "PO",
+    description: "非定型肺炎カバーの経口薬。マクロライド代替。腎機能調整不要",
+    spectrum: ["Mycoplasma pneumoniae", "Chlamydophila pneumoniae", "Legionella pneumophila", "MRSA（一部）", "Rickettsia spp."],
+    dosing: {
+      standard: { dose: "100mg", route: "PO", interval: "12時間毎", note: "初回200mg loading可" },
+      renalAdjustment: [
+        { gfrRange: "全段階", gfrMin: 0, gfrMax: 999, dose: "100mg", interval: "12時間毎（腎機能調整不要）" },
+        { gfrRange: "HD", gfrMin: -1, gfrMax: -1, dose: "100mg", interval: "12時間毎（透析で除去されない）" },
+      ],
+    },
+    references: [{ id: "ref-doxy-1", title: "ビブラマイシン添付文書", source: "添付文書" }],
   },
 ]

@@ -1,8 +1,13 @@
+export type RecommendationStrength = "Strong" | "Moderate" | "Weak"
+export type EvidenceLevel = "High" | "Moderate" | "Low"
+
 export type Reference = {
   id: string
   title: string
   source: string // e.g., "IDSA 2019", "JAID/JSC 2019"
   url?: string
+  guidelineSource?: string
+  sourceUrl?: string
 }
 
 export type DosingRegimen = {
@@ -18,6 +23,9 @@ export type DrugRegimen = {
   antibioticName: string
   regimen: DosingRegimen
   referenceTag: string // e.g., "[IDSA 2019]"
+  recommendationStrength?: RecommendationStrength
+  evidenceLevel?: EvidenceLevel
+  warningNote?: string // e.g., "FQ温存推奨", "単剤使用不可"
 }
 
 export type RenalDosing = {
@@ -69,4 +77,6 @@ export type Infection = {
   }
   notes?: string[]
   references: Reference[]
+  lastReviewed?: string // e.g., "2026-05-22"
+  updateNote?: string
 }

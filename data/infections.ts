@@ -18,11 +18,14 @@ export const infections: Infection[] = [
     ],
     empiricTherapy: {
       firstLine: [
+        // 入院（非ICU）
         {
           antibioticId: "ctr",
           antibioticName: "セフトリアキソン",
-          regimen: { dose: "2g", route: "IV", interval: "24時間毎", duration: "5-7日間" },
+          regimen: { dose: "2g", route: "IV", interval: "24時間毎", duration: "5-7日間", note: "入院: + AZM併用" },
           referenceTag: "[IDSA/ATS 2019]",
+          recommendationStrength: "Strong",
+          evidenceLevel: "High",
         },
         {
           antibioticId: "azm",
@@ -30,18 +33,42 @@ export const infections: Infection[] = [
           regimen: { dose: "500mg→250mg", route: "IV/PO", interval: "24時間毎", duration: "初日500mg, 2日目以降250mg（計5日間）", note: "非定型カバー併用" },
           referenceTag: "[IDSA/ATS 2019]",
         },
+        // 外来（併存疾患なし）
+        {
+          antibioticId: "ampc",
+          antibioticName: "アモキシシリン",
+          regimen: { dose: "1g", route: "PO", interval: "8時間毎", duration: "5日間", note: "外来・併存疾患なし" },
+          referenceTag: "[IDSA/ATS 2019]",
+          recommendationStrength: "Strong",
+          evidenceLevel: "Moderate",
+        },
       ],
       alternatives: [
+        // 外来代替
+        {
+          antibioticId: "doxy",
+          antibioticName: "ドキシサイクリン",
+          regimen: { dose: "100mg", route: "PO", interval: "12時間毎", duration: "5日間", note: "外来・マクロライド代替（非定型カバー）" },
+          referenceTag: "[IDSA/ATS 2019]",
+        },
+        // 外来（併存疾患あり）
+        {
+          antibioticId: "ampc-cva",
+          antibioticName: "アモキシシリン/クラブラン酸",
+          regimen: { dose: "1錠", route: "PO", interval: "8時間毎", duration: "5日間", note: "外来・併存疾患あり: + AZMまたはDOXY併用" },
+          referenceTag: "[IDSA/ATS 2019]",
+        },
         {
           antibioticId: "lvfx",
           antibioticName: "レボフロキサシン",
           regimen: { dose: "500mg", route: "IV/PO", interval: "24時間毎", duration: "5-7日間", note: "呼吸器キノロン単剤" },
           referenceTag: "[IDSA/ATS 2019]",
+          warningNote: "FQ温存推奨: 他の選択肢がある場合は使用を控える",
         },
         {
           antibioticId: "abpc-sbt",
           antibioticName: "アンピシリン/スルバクタム",
-          regimen: { dose: "3g", route: "IV", interval: "6時間毎", duration: "5-7日間", note: "+ AZM併用" },
+          regimen: { dose: "3g", route: "IV", interval: "6時間毎", duration: "5-7日間", note: "入院: + AZM併用" },
           referenceTag: "[JAID/JSC 2019]",
         },
       ],
@@ -97,10 +124,15 @@ export const infections: Infection[] = [
       ],
       typicalDuration: "5-7日間（最短5日間）",
     },
+    notes: [
+      "インフルエンザ流行期: ウイルス性肺炎に細菌性肺炎の合併を考慮。オセルタミビル＋抗菌薬の併用を検討",
+      "外来治療は併存疾患の有無で治療戦略が異なる（COPD, 糖尿病, 心不全, 肝腎疾患等）",
+    ],
     references: [
       { id: "cap-ref-1", title: "Metlay JP, et al. Diagnosis and Treatment of Adults with CAP. Am J Respir Crit Care Med. 2019;200(7):e45-e67", source: "IDSA/ATS 2019" },
       { id: "cap-ref-2", title: "JAID/JSC感染症治療ガイド2019 呼吸器感染症", source: "JAID/JSC 2019" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 2. 院内肺炎 (HAP/VAP) =====
@@ -153,6 +185,7 @@ export const infections: Infection[] = [
         "48-72時間で改善なし",
         "多剤耐性菌（MDRAB, CRE等）検出",
         "敗血症性ショック合併",
+        "MRSAリスク因子: MRSA既往、IV drug use、最近の抗菌薬使用、MRSA保菌",
       ],
       options: [
         {
@@ -192,10 +225,16 @@ export const infections: Infection[] = [
       ],
       typicalDuration: "7日間",
     },
+    notes: [
+      "VAP: 多剤耐性GNRリスクがある場合、二剤GNRカバー（例: MEPM + CPFX or AMK）を考慮",
+      "アミノグリコシド単剤はHAP/VAPの治療として不適切（単剤使用不可）",
+      "MRSAリスク層別化: リスク因子なし＋MRSA保菌陰性ならVCM不要",
+    ],
     references: [
       { id: "hap-ref-1", title: "Kalil AC, et al. Management of Adults With HAP and VAP. Clin Infect Dis. 2016;63(5):e61-e111", source: "IDSA/ATS 2016" },
       { id: "hap-ref-2", title: "日本版敗血症診療ガイドライン J-SSCG 2024", source: "J-SSCG 2024" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 3. 尿路感染症 =====
@@ -214,6 +253,16 @@ export const infections: Infection[] = [
     ],
     empiricTherapy: {
       firstLine: [
+        // 単純性膀胱炎
+        {
+          antibioticId: "fosfomycin",
+          antibioticName: "ホスホマイシン",
+          regimen: { dose: "3g", route: "PO", interval: "単回投与", duration: "単回", note: "単純性膀胱炎・第一選択" },
+          referenceTag: "[IDSA 2011]",
+          recommendationStrength: "Strong",
+          evidenceLevel: "Moderate",
+        },
+        // 腎盂腎炎・複雑性
         {
           antibioticId: "ctr",
           antibioticName: "セフトリアキソン",
@@ -227,6 +276,7 @@ export const infections: Infection[] = [
           antibioticName: "レボフロキサシン",
           regimen: { dose: "500mg", route: "IV/PO", interval: "24時間毎", duration: "5-7日間", note: "軽症・経口可能な場合" },
           referenceTag: "[IDSA 2010]",
+          warningNote: "FQ温存推奨: 単純性膀胱炎でのFQ使用は可能な限り避ける（耐性誘導・CDIリスク）",
         },
         {
           antibioticId: "abpc-sbt",
@@ -282,13 +332,16 @@ export const infections: Infection[] = [
       typicalDuration: "単純性膀胱炎3日間 / 腎盂腎炎7-14日間 / 複雑性10-14日間",
     },
     notes: [
-      "単純性膀胱炎にはST合剤3日間またはニトロフラントイン5日間が第一選択",
+      "単純性膀胱炎第一選択: ホスホマイシン3g単回、ST合剤3日間、ニトロフラントイン5日間（日本未発売）",
       "無症候性細菌尿は妊婦・泌尿器科手術前以外は治療不要",
+      "FQは単純性膀胱炎には原則使用しない（IDSA: FQは他に選択肢がない場合に限定）",
+      "複雑性UTI: カテーテル関連の場合はカテーテル交換/抜去が重要",
     ],
     references: [
-      { id: "uti-ref-1", title: "Gupta K, et al. International Clinical Practice Guidelines for UTI. Clin Infect Dis. 2011;52(5):e103-e120", source: "IDSA 2010" },
+      { id: "uti-ref-1", title: "Gupta K, et al. International Clinical Practice Guidelines for UTI. Clin Infect Dis. 2011;52(5):e103-e120", source: "IDSA 2011" },
       { id: "uti-ref-2", title: "JAID/JSC感染症治療ガイド2019 尿路感染症", source: "JAID/JSC 2019" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 4. 皮膚軟部組織感染症 =====
@@ -305,18 +358,20 @@ export const infections: Infection[] = [
     ],
     empiricTherapy: {
       firstLine: [
+        // 非膿瘍性（蜂窩織炎・丹毒）
         {
           antibioticId: "cez",
           antibioticName: "セファゾリン",
-          regimen: { dose: "2g", route: "IV", interval: "8時間毎", duration: "5-7日間", note: "蜂窩織炎・非化膿性" },
+          regimen: { dose: "2g", route: "IV", interval: "8時間毎", duration: "5-7日間", note: "非膿瘍性（蜂窩織炎）: GAS/MSSA カバー" },
           referenceTag: "[IDSA 2014]",
         },
       ],
       alternatives: [
+        // 膿瘍性（MRSA考慮）
         {
           antibioticId: "vcm",
           antibioticName: "バンコマイシン",
-          regimen: { dose: "15-20mg/kg", route: "IV", interval: "8-12時間毎", note: "MRSA疑い" },
+          regimen: { dose: "15-20mg/kg", route: "IV", interval: "8-12時間毎", note: "膿瘍性・MRSA疑い（切開排膿 + 抗菌薬）" },
           referenceTag: "[IDSA 2014]",
         },
         {
@@ -377,13 +432,16 @@ export const infections: Infection[] = [
       typicalDuration: "蜂窩織炎5-7日間 / 壊死性筋膜炎はソースコントロール次第",
     },
     notes: [
-      "壊死性筋膜炎は緊急外科的デブリードマンが最優先",
+      "【重要】壊死性筋膜炎は外科的緊急（surgical emergency）。抗菌薬より緊急デブリードマンが最優先",
+      "膿瘍性 vs 非膿瘍性で治療戦略が異なる。膿瘍性は切開排膿が第一",
       "CLDM追加の理由: 毒素産生抑制（GAS, MSSA）",
+      "日本ではCA-MRSAの割合は欧米より低い（5-10%程度）が、膿瘍・再発例では考慮",
     ],
     references: [
       { id: "ssti-ref-1", title: "Stevens DL, et al. Practice Guidelines for SSTI. Clin Infect Dis. 2014;59(2):e10-e52", source: "IDSA 2014" },
       { id: "ssti-ref-2", title: "JAID/JSC感染症治療ガイド2019 皮膚軟部組織感染症", source: "JAID/JSC 2019" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 5. 腹腔内感染症 =====
@@ -407,6 +465,7 @@ export const infections: Infection[] = [
           antibioticName: "アンピシリン/スルバクタム",
           regimen: { dose: "3g", route: "IV", interval: "6時間毎", note: "軽症〜中等症・市中発症" },
           referenceTag: "[SIS/IDSA 2010]",
+          warningNote: "E.coli耐性率上昇に注意: 地域の感受性パターンを確認。耐性率>20%なら代替薬を考慮",
         },
       ],
       alternatives: [
@@ -464,13 +523,16 @@ export const infections: Infection[] = [
       typicalDuration: "ソースコントロール後4日間（STOP-IT trial）",
     },
     notes: [
-      "ソースコントロール（ドレナージ・手術）が最重要",
-      "抗菌薬のみでは治癒困難",
+      "ソースコントロール（ドレナージ・手術）が最重要。抗菌薬のみでは治癒困難",
+      "重症度層別化: 軽症市中発症→ABPC/SBT、重症/院内発症→PIPC/TAZ or MEPM",
+      "MRSAリスク（最近の入院・抗菌薬使用）がある場合はVCM追加を考慮",
+      "Candidaリスク（免疫不全、長期抗菌薬、上部消化管穿孔）がある場合は抗真菌薬追加を考慮",
     ],
     references: [
       { id: "iai-ref-1", title: "Solomkin JS, et al. Diagnosis and Management of Complicated IAI. Clin Infect Dis. 2010;50(2):133-164", source: "SIS/IDSA 2010" },
       { id: "iai-ref-2", title: "Sawyer RG, et al. Trial of Short-Course Antimicrobial Therapy for IAI (STOP-IT). N Engl J Med. 2015;372(21):1996-2005", source: "NEJM 2015" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 6. 血流感染症（菌血症） =====
@@ -573,6 +635,7 @@ export const infections: Infection[] = [
       { id: "bsi-ref-2", title: "Liu C, et al. MRSA Guidelines. Clin Infect Dis. 2011;52(3):e18-e55", source: "IDSA 2011" },
       { id: "bsi-ref-3", title: "Mermel LA, et al. IDSA Guidelines for Intravascular Catheter-Related Infection. Clin Infect Dis. 2009;49(1):1-45", source: "IDSA 2009" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 7. 感染性心内膜炎 =====
@@ -631,20 +694,35 @@ export const infections: Infection[] = [
     deescalation: {
       criteria: [
         "血培結果に基づく標的治療への変更",
-        "Viridans group Strep→CTRX単剤",
-        "MSSA→CEZ（VCMより優れる）",
+        "Viridans group Strep→PCN感受性に応じた選択",
+        "MSSA→CEZ（VCMより予後良好）",
+        "E. faecalis→ABPC + CTRX（腎毒性回避）",
       ],
       options: [
         {
           antibioticId: "cez",
           antibioticName: "セファゾリン",
-          regimen: { dose: "2g", route: "IV", interval: "8時間毎", note: "MSSA IE: 6週間" },
+          regimen: { dose: "2g", route: "IV", interval: "8時間毎", note: "MSSA IE: 6週間。VCMより優先", duration: "6週間" },
           referenceTag: "[AHA 2015]",
+          recommendationStrength: "Strong",
+          evidenceLevel: "Moderate",
         },
         {
           antibioticId: "ctr",
           antibioticName: "セフトリアキソン",
-          regimen: { dose: "2g", route: "IV", interval: "24時間毎", note: "Viridans Strep IE: 4週間", duration: "4週間" },
+          regimen: { dose: "2g", route: "IV", interval: "24時間毎", note: "Viridans Strep（PCN MIC≤0.12）: 4週間", duration: "4週間" },
+          referenceTag: "[AHA 2015]",
+        },
+        {
+          antibioticId: "abpc",
+          antibioticName: "アンピシリン",
+          regimen: { dose: "2g", route: "IV", interval: "4時間毎", note: "E. faecalis IE: + CTRX 2g q12h（6週間）。ゲンタマイシン不要で腎毒性回避", duration: "6週間" },
+          referenceTag: "[ESC 2023]",
+        },
+        {
+          antibioticId: "pcg",
+          antibioticName: "ペニシリンG",
+          regimen: { dose: "1800-2400万単位/日", route: "IV", interval: "持続投与 or 4時間毎", note: "Viridans Strep（PCN高度感受性）: 4週間", duration: "4週間" },
           referenceTag: "[AHA 2015]",
         },
       ],
@@ -659,12 +737,15 @@ export const infections: Infection[] = [
     },
     notes: [
       "手術適応: 心不全、コントロール不良な感染、塞栓予防（大きな疣贅）",
-      "MSSA IEではCEZがVCMより予後良好",
+      "MSSA IEではCEZがVCMより予後良好（必ずCEZへde-escalation）",
+      "E. faecalis IE: ABPC + CTRX が標準治療（ESC 2023推奨。ゲンタマイシン併用の腎毒性を回避）",
+      "Viridans strep: PCN MIC ≤0.12→PCG or CTRX 4週間、MIC 0.12-0.5→PCG + GM 2週間 + CTRX 4週間",
     ],
     references: [
       { id: "ie-ref-1", title: "Baddour LM, et al. AHA Scientific Statement on IE. Circulation. 2015;132(15):1435-1486", source: "AHA 2015" },
-      { id: "ie-ref-2", title: "ESC Guidelines for IE 2023", source: "ESC 2023" },
+      { id: "ie-ref-2", title: "Delgado V, et al. 2023 ESC Guidelines for the management of endocarditis. Eur Heart J. 2023;44(39):3948-4042", source: "ESC 2023" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 8. 細菌性髄膜炎 =====
@@ -728,20 +809,28 @@ export const infections: Infection[] = [
     deescalation: {
       criteria: [
         "髄液培養・感受性結果に基づく",
-        "肺炎球菌ペニシリン感受性→ABPC",
-        "髄膜炎菌→CTRX単剤",
+        "肺炎球菌: PCN MIC ≤0.06→PCG or ABPC（VCM中止可）",
+        "肺炎球菌: PCN MIC 0.12-1.0→CTRX継続（VCM中止可、CTX MIC≤0.5の場合）",
+        "肺炎球菌: PCN MIC ≥2.0→VCM + CTRX継続",
+        "髄膜炎菌→CTRX単剤 or PCG",
       ],
       options: [
         {
+          antibioticId: "pcg",
+          antibioticName: "ペニシリンG",
+          regimen: { dose: "2400万単位/日", route: "IV", interval: "4時間毎分割", note: "肺炎球菌（PCN MIC≤0.06）" },
+          referenceTag: "[IDSA 2004]",
+        },
+        {
           antibioticId: "abpc",
           antibioticName: "アンピシリン",
-          regimen: { dose: "2g", route: "IV", interval: "4時間毎", note: "ペニシリン感受性肺炎球菌" },
+          regimen: { dose: "2g", route: "IV", interval: "4時間毎", note: "ペニシリン感受性肺炎球菌 or Listeria" },
           referenceTag: "[IDSA 2004]",
         },
         {
           antibioticId: "ctr",
           antibioticName: "セフトリアキソン",
-          regimen: { dose: "2g", route: "IV", interval: "12時間毎", note: "髄膜炎菌" },
+          regimen: { dose: "2g", route: "IV", interval: "12時間毎", note: "髄膜炎菌 or 肺炎球菌（PCN中等度耐性）" },
           referenceTag: "[IDSA 2004]",
         },
       ],
@@ -755,13 +844,16 @@ export const infections: Infection[] = [
       typicalDuration: "髄膜炎菌7日間 / 肺炎球菌10-14日間 / Listeria 21日間以上 / GBS 14-21日間",
     },
     notes: [
-      "デキサメタゾン 0.15mg/kg q6h × 4日間を抗菌薬初回投与の直前または同時に開始（肺炎球菌疑い）",
-      "治療開始前の髄液検査が最重要（30分以内に抗菌薬投与）",
+      "【重要】デキサメタゾン 0.15mg/kg q6h × 4日間を抗菌薬初回投与の直前または同時に開始（肺炎球菌疑い）。予後改善のエビデンスあり",
+      "治療開始前の髄液検査が最重要だが、検査のために抗菌薬投与を遅らせてはならない（30分以内に投与）",
+      "年齢別カバー: 50歳以上・免疫不全ではListeria カバー（ABPC追加）が必須",
+      "PCN MICに基づくde-escalationが重要（MIC≤0.06: PCG可、MIC 0.12-1.0: CTRX継続、MIC≥2.0: VCM+CTRX）",
     ],
     references: [
       { id: "men-ref-1", title: "Tunkel AR, et al. Practice Guidelines for Bacterial Meningitis. Clin Infect Dis. 2004;39(9):1267-1284", source: "IDSA 2004" },
       { id: "men-ref-2", title: "van de Beek D, et al. Clinical Features and Prognostic Factors in Adults with Bacterial Meningitis. N Engl J Med. 2004;351(18):1849-1859", source: "NEJM 2004" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 9. 骨・関節感染症 =====
@@ -858,6 +950,7 @@ export const infections: Infection[] = [
       { id: "bji-ref-1", title: "Osmon DR, et al. IDSA Guidelines for Prosthetic Joint Infection. Clin Infect Dis. 2013;56(1):e1-e25", source: "IDSA 2015" },
       { id: "bji-ref-2", title: "Li HK, et al. Oral versus IV Antibiotics for Bone and Joint Infection (OVIVA). N Engl J Med. 2019;380(5):425-436", source: "OVIVA/NEJM 2019" },
     ],
+    lastReviewed: "2026-05-22",
   },
 
   // ===== 10. CDI =====
@@ -892,18 +985,19 @@ export const infections: Infection[] = [
         "劇症型CDI（低血圧、イレウス、巨大結腸症）",
         "白血球≥15,000、Cr上昇",
         "経口投与不能",
+        "劇症型は外科コンサルト必須（大腸全摘の適応評価）",
       ],
       options: [
         {
           antibioticId: "vcm-po",
-          antibioticName: "バンコマイシン（経口/経管）",
-          regimen: { dose: "500mg", route: "PO", interval: "6時間毎", note: "高用量 + メトロニダゾールIV 500mg q8h" },
+          antibioticName: "バンコマイシン（経口/経管 + 注腸）",
+          regimen: { dose: "500mg", route: "PO", interval: "6時間毎", note: "劇症型: 経口/経管 500mg q6h + 注腸 500mg/100mL NS q6h + MNZ IV" },
           referenceTag: "[IDSA/SHEA 2021]",
         },
         {
           antibioticId: "mtz",
           antibioticName: "メトロニダゾール",
-          regimen: { dose: "500mg", route: "IV", interval: "8時間毎", note: "劇症型でVCM経口に追加" },
+          regimen: { dose: "500mg", route: "IV", interval: "8時間毎", note: "劇症型でVCM経口に追加（必須）" },
           referenceTag: "[IDSA/SHEA 2021]",
         },
       ],
@@ -925,13 +1019,16 @@ export const infections: Infection[] = [
     },
     notes: [
       "原因抗菌薬の中止が最も重要な治療介入",
-      "再発例ではVCM漸減パルス療法またはFDX",
-      "糞便微生物移植（FMT）は3回以上再発で考慮",
+      "FDXは劇症型CDIに対するエビデンスが限定的。劇症型ではVCM高用量（経口+注腸）+ MNZ IVが標準",
+      "再発パスウェイ: 1回目再発→FDX（extended-pulsed: 200mg q12h 5日→200mg 1日おき20日間）",
+      "2回目以降再発→ベズロトキスマブ（抗トキシンB抗体）の追加を考慮",
+      "3回以上再発→糞便微生物移植（FMT）を考慮",
       "検査陽性でも無症候性であれば治療不要（保菌）",
     ],
     references: [
       { id: "cdi-ref-1", title: "Johnson S, et al. Clinical Practice Guideline by IDSA and SHEA: 2021 Focused Update on CDI in Adults. Clin Infect Dis. 2021;73(5):e1029-e1044", source: "IDSA/SHEA 2021" },
       { id: "cdi-ref-2", title: "McDonald LC, et al. Clinical Practice Guidelines for CDI. Clin Infect Dis. 2018;66(7):e1-e48", source: "IDSA/SHEA 2018" },
     ],
+    lastReviewed: "2026-05-22",
   },
 ]

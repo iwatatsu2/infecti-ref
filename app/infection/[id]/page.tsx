@@ -28,6 +28,7 @@ function DrugCard({ r }: { r: DrugRegimen }) {
       </div>
       {r.regimen.duration && <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>{r.regimen.duration}</div>}
       {r.regimen.note && <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>{r.regimen.note}</div>}
+      {r.warningNote && <div className="text-xs mt-1.5 px-2 py-1 rounded-lg bg-amber-500/10 text-amber-400 font-medium">⚠ {r.warningNote}</div>}
     </Link>
   )
 }
@@ -68,7 +69,10 @@ export default function InfectionDetail() {
       </Link>
 
       <h1 className="text-2xl font-bold text-white mb-0.5">{infection.name}</h1>
-      <p className="text-xs mb-5" style={{ color: "var(--text-muted)" }}>{infection.nameEn}</p>
+      <div className="flex items-center gap-2 mb-5">
+        <p className="text-xs" style={{ color: "var(--text-muted)" }}>{infection.nameEn}</p>
+        {infection.lastReviewed && <span className="text-[10px] px-1.5 py-0.5 rounded-full" style={{ background: "var(--bg-elevated)", color: "var(--text-muted)" }}>最終確認: {infection.lastReviewed}</span>}
+      </div>
 
       {/* 想定菌 */}
       <Section title="想定菌" accent="slate" icon={<BacteriaIcon className="w-4 h-4" />}>
