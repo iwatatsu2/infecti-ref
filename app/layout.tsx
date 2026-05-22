@@ -47,6 +47,9 @@ export default function RootLayout({
               <Link href="/antibiotics" className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors" style={{ color: "var(--text-secondary)" }}>
                 抗菌薬
               </Link>
+              <Link href="/about" className="px-2 py-1.5 rounded-lg text-sm transition-colors" style={{ color: "var(--text-muted)" }}>
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+              </Link>
             </nav>
           </div>
         </header>
