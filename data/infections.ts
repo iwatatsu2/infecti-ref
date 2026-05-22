@@ -8,12 +8,12 @@ export const infections: Infection[] = [
     nameEn: "Community-Acquired Pneumonia (CAP)",
     category: "呼吸器",
     commonPathogens: [
-      "Streptococcus pneumoniae",
-      "Haemophilus influenzae",
-      "Moraxella catarrhalis",
-      "Mycoplasma pneumoniae",
-      "Chlamydophila pneumoniae",
-      "Legionella pneumophila",
+      "Streptococcus pneumoniae（肺炎球菌）",
+      "Haemophilus influenzae（インフルエンザ桿菌）",
+      "Moraxella catarrhalis（モラクセラ・カタラーリス）",
+      "Mycoplasma pneumoniae（マイコプラズマ）",
+      "Chlamydophila pneumoniae（クラミドフィラ）",
+      "Legionella pneumophila（レジオネラ）",
       "インフルエンザウイルス（二次感染）",
     ],
     empiricTherapy: {
@@ -110,13 +110,13 @@ export const infections: Infection[] = [
     nameEn: "Hospital-Acquired / Ventilator-Associated Pneumonia (HAP/VAP)",
     category: "呼吸器",
     commonPathogens: [
-      "Pseudomonas aeruginosa",
-      "MRSA",
-      "Klebsiella pneumoniae",
-      "Acinetobacter baumannii",
-      "Enterobacter spp.",
-      "E. coli（ESBL産生含む）",
-      "Stenotrophomonas maltophilia",
+      "Pseudomonas aeruginosa（緑膿菌）",
+      "MRSA（メチシリン耐性黄色ブドウ球菌）",
+      "Klebsiella pneumoniae（肺炎桿菌）",
+      "Acinetobacter baumannii（アシネトバクター）",
+      "Enterobacter spp.（エンテロバクター属）",
+      "E. coli（大腸菌・ESBL産生含む）",
+      "Stenotrophomonas maltophilia（ステノトロホモナス）",
     ],
     empiricTherapy: {
       firstLine: [
@@ -205,12 +205,12 @@ export const infections: Infection[] = [
     nameEn: "Urinary Tract Infection (UTI)",
     category: "尿路",
     commonPathogens: [
-      "E. coli（最多・70-95%）",
-      "Klebsiella pneumoniae",
-      "Proteus mirabilis",
-      "Enterococcus faecalis",
-      "Staphylococcus saprophyticus（若年女性）",
-      "Pseudomonas aeruginosa（複雑性）",
+      "E. coli（大腸菌・最多70-95%）",
+      "Klebsiella pneumoniae（肺炎桿菌）",
+      "Proteus mirabilis（プロテウス・ミラビリス）",
+      "Enterococcus faecalis（腸球菌）",
+      "Staphylococcus saprophyticus（腐性ブドウ球菌・若年女性）",
+      "Pseudomonas aeruginosa（緑膿菌・複雑性）",
     ],
     empiricTherapy: {
       firstLine: [
@@ -298,8 +298,8 @@ export const infections: Infection[] = [
     nameEn: "Skin and Soft Tissue Infection (SSTI)",
     category: "皮膚・軟部組織",
     commonPathogens: [
-      "Streptococcus pyogenes (GAS)",
-      "Staphylococcus aureus (MSSA/MRSA)",
+      "Streptococcus pyogenes（A群溶血性連鎖球菌・GAS）",
+      "Staphylococcus aureus（黄色ブドウ球菌・MSSA/MRSA）",
       "嫌気性菌（壊死性筋膜炎）",
       "グラム陰性桿菌（糖尿病足感染）",
     ],
@@ -393,12 +393,12 @@ export const infections: Infection[] = [
     nameEn: "Intra-Abdominal Infection (IAI)",
     category: "腹腔内",
     commonPathogens: [
-      "E. coli",
-      "Klebsiella spp.",
-      "Bacteroides fragilis",
-      "Enterococcus spp.",
-      "Streptococcus spp.",
-      "Pseudomonas aeruginosa（院内発症）",
+      "E. coli（大腸菌）",
+      "Klebsiella spp.（クレブシエラ属）",
+      "Bacteroides fragilis（バクテロイデス・フラジリス）",
+      "Enterococcus spp.（腸球菌属）",
+      "Streptococcus spp.（連鎖球菌属）",
+      "Pseudomonas aeruginosa（緑膿菌・院内発症）",
     ],
     empiricTherapy: {
       firstLine: [
@@ -480,13 +480,13 @@ export const infections: Infection[] = [
     nameEn: "Bloodstream Infection (BSI)",
     category: "血流",
     commonPathogens: [
-      "E. coli",
-      "Staphylococcus aureus (MSSA/MRSA)",
-      "Klebsiella pneumoniae",
-      "Enterococcus spp.",
-      "Streptococcus spp.",
-      "Pseudomonas aeruginosa",
-      "Candida spp.（カテーテル関連）",
+      "E. coli（大腸菌）",
+      "Staphylococcus aureus（黄色ブドウ球菌・MSSA/MRSA）",
+      "Klebsiella pneumoniae（肺炎桿菌）",
+      "Enterococcus spp.（腸球菌属）",
+      "Streptococcus spp.（連鎖球菌属）",
+      "Pseudomonas aeruginosa（緑膿菌）",
+      "Candida spp.（カンジダ属・カテーテル関連）",
     ],
     empiricTherapy: {
       firstLine: [
@@ -582,11 +582,11 @@ export const infections: Infection[] = [
     nameEn: "Infective Endocarditis (IE)",
     category: "心血管",
     commonPathogens: [
-      "Staphylococcus aureus（最多）",
-      "Streptococcus viridans group",
-      "Enterococcus faecalis",
-      "HACEK group",
-      "Coagulase-negative Staphylococci（人工弁）",
+      "Staphylococcus aureus（黄色ブドウ球菌・最多）",
+      "Streptococcus viridans group（緑色連鎖球菌群）",
+      "Enterococcus faecalis（腸球菌）",
+      "HACEK group（ハチェック群）",
+      "Coagulase-negative Staphylococci（コアグラーゼ陰性ブドウ球菌・人工弁）",
     ],
     empiricTherapy: {
       firstLine: [
@@ -674,11 +674,11 @@ export const infections: Infection[] = [
     nameEn: "Bacterial Meningitis",
     category: "中枢神経",
     commonPathogens: [
-      "Streptococcus pneumoniae（成人最多）",
-      "Neisseria meningitidis",
-      "Listeria monocytogenes（高齢者・免疫不全）",
-      "Haemophilus influenzae type b",
-      "Group B Streptococcus（新生児）",
+      "Streptococcus pneumoniae（肺炎球菌・成人最多）",
+      "Neisseria meningitidis（髄膜炎菌）",
+      "Listeria monocytogenes（リステリア・高齢者/免疫不全）",
+      "Haemophilus influenzae type b（インフルエンザ桿菌b型）",
+      "Group B Streptococcus（B群連鎖球菌・新生児）",
     ],
     empiricTherapy: {
       firstLine: [
@@ -771,11 +771,11 @@ export const infections: Infection[] = [
     nameEn: "Bone and Joint Infection",
     category: "骨・関節",
     commonPathogens: [
-      "Staphylococcus aureus（最多）",
-      "Coagulase-negative Staphylococci（人工関節）",
-      "Streptococcus spp.",
-      "E. coli",
-      "Pseudomonas aeruginosa（IV drug user）",
+      "Staphylococcus aureus（黄色ブドウ球菌・最多）",
+      "Coagulase-negative Staphylococci（コアグラーゼ陰性ブドウ球菌・人工関節）",
+      "Streptococcus spp.（連鎖球菌属）",
+      "E. coli（大腸菌）",
+      "Pseudomonas aeruginosa（緑膿菌・IV drug user）",
     ],
     empiricTherapy: {
       firstLine: [
@@ -867,7 +867,7 @@ export const infections: Infection[] = [
     nameEn: "Clostridioides difficile Infection (CDI)",
     category: "消化管",
     commonPathogens: [
-      "Clostridioides difficile",
+      "Clostridioides difficile（クロストリディオイデス・ディフィシル）",
     ],
     empiricTherapy: {
       firstLine: [
