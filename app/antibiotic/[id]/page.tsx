@@ -5,6 +5,7 @@ import { useParams } from "next/navigation"
 import Link from "next/link"
 import { antibiotics } from "@/data/antibiotics"
 import { infections } from "@/data/infections"
+import { RouteIcon, ShieldIcon } from "@/components/icons"
 
 export default function AntibioticDetail() {
   const params = useParams()
@@ -47,11 +48,11 @@ export default function AntibioticDetail() {
           <h1 className="text-2xl font-bold text-white">{ab.name}</h1>
           <div className="text-xs" style={{ color: "var(--text-muted)" }}>{ab.genericName}</div>
         </div>
-        <span className={`text-xs font-bold px-2 py-1 rounded-lg shrink-0 ${
+        <span className={`text-xs font-bold px-2 py-1 rounded-lg shrink-0 inline-flex items-center gap-1 ${
           ab.route === "IV" ? "bg-blue-500/20 text-blue-400" :
           ab.route === "PO" ? "bg-green-500/20 text-green-400" :
           "bg-purple-500/20 text-purple-400"
-        }`}>{ab.route}</span>
+        }`}><RouteIcon route={ab.route} className="w-3.5 h-3.5" />{ab.route}</span>
       </div>
 
       {/* Description card */}
@@ -62,7 +63,7 @@ export default function AntibioticDetail() {
 
       {/* Spectrum */}
       <section className="mb-5">
-        <div className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)" }}>スペクトラム</div>
+        <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: "var(--text-muted)" }}><ShieldIcon className="w-4 h-4" />スペクトラム</div>
         <div className="flex flex-wrap gap-1.5">
           {ab.spectrum.map((s, i) => (
             <span key={i} className="text-xs px-2.5 py-1 rounded-lg italic font-medium bg-green-500/10 text-green-400" style={{ border: "1px solid rgba(34,197,94,0.15)" }}>{s}</span>

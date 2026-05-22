@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { antibiotics } from "@/data/antibiotics"
+import { RouteIcon } from "@/components/icons"
 
 const catColors: Record<string, string> = {
   "ペニシリン系": "#3b82f6",
@@ -77,11 +78,11 @@ export default function AntibioticsPage() {
                   className="flex items-center gap-3 p-3.5 rounded-xl active:scale-[0.98] transition-transform"
                   style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
                 >
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0 ${
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded shrink-0 inline-flex items-center gap-0.5 ${
                     ab.route === "IV" ? "bg-blue-500/20 text-blue-400" :
                     ab.route === "PO" ? "bg-green-500/20 text-green-400" :
                     "bg-purple-500/20 text-purple-400"
-                  }`}>{ab.route}</span>
+                  }`}><RouteIcon route={ab.route} className="w-3 h-3" />{ab.route}</span>
                   <div className="flex-1 min-w-0">
                     <div className="font-semibold text-white text-sm">{ab.name}</div>
                     <div className="text-[10px]" style={{ color: "var(--text-muted)" }}>{ab.genericName}</div>

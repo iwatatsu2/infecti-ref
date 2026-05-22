@@ -4,6 +4,7 @@ import { useParams } from "next/navigation"
 import Link from "next/link"
 import { infections } from "@/data/infections"
 import { DrugRegimen } from "@/types"
+import { BacteriaIcon, ArrowUpIcon, ArrowDownIcon, StopIcon, RouteIcon } from "@/components/icons"
 
 function DrugCard({ r }: { r: DrugRegimen }) {
   return (
@@ -18,11 +19,11 @@ function DrugCard({ r }: { r: DrugRegimen }) {
       </div>
       <div className="flex items-center gap-2 mt-2">
         <span className="font-mono font-bold text-white text-sm">{r.regimen.dose}</span>
-        <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold ${
+        <span className={`text-[10px] px-1.5 py-0.5 rounded font-bold inline-flex items-center gap-0.5 ${
           r.regimen.route === "IV" ? "bg-blue-500/20 text-blue-400" :
           r.regimen.route === "PO" ? "bg-green-500/20 text-green-400" :
           "bg-purple-500/20 text-purple-400"
-        }`}>{r.regimen.route}</span>
+        }`}><RouteIcon route={r.regimen.route} className="w-3 h-3" />{r.regimen.route}</span>
         <span className="text-xs" style={{ color: "var(--text-secondary)" }}>{r.regimen.interval}</span>
       </div>
       {r.regimen.duration && <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>{r.regimen.duration}</div>}
@@ -31,7 +32,7 @@ function DrugCard({ r }: { r: DrugRegimen }) {
   )
 }
 
-function Section({ title, accent, children }: { title: string; accent: string; children: React.ReactNode }) {
+function Section({ title, accent, icon, children }: { title: string; accent: string; icon?: React.ReactNode; children: React.ReactNode }) {
   const colors: Record<string, { bg: string; border: string; text: string; dot: string }> = {
     blue: { bg: "rgba(59,130,246,0.06)", border: "rgba(59,130,246,0.15)", text: "#60a5fa", dot: "#3b82f6" },
     red: { bg: "rgba(239,68,68,0.06)", border: "rgba(239,68,68,0.15)", text: "#f87171", dot: "#ef4444" },
@@ -43,7 +44,7 @@ function Section({ title, accent, children }: { title: string; accent: string; c
   return (
     <section className="mb-5 rounded-2xl p-4" style={{ background: c.bg, border: `1px solid ${c.border}` }}>
       <div className="flex items-center gap-2 mb-3">
-        <div className="w-1.5 h-1.5 rounded-full" style={{ background: c.dot }} />
+        {icon || <div className="w-1.5 h-1.5 rounded-full" style={{ background: c.dot }} />}
         <h2 className="text-sm font-bold" style={{ color: c.text }}>{title}</h2>
       </div>
       {children}
@@ -70,7 +71,7 @@ export default function InfectionDetail() {
       <p className="text-xs mb-5" style={{ color: "var(--text-muted)" }}>{infection.nameEn}</p>
 
       {/* 想定菌 */}
-      <Section title="想定菌" accent="slate">
+      <Section title="想定菌" accent="slate" icon={<BacteriaIcon className="w-4 h-4" />}>
         <div className="flex flex-wrap gap-1.5">
           {infection.commonPathogens.map((p, i) => (
             <span key={i} className="text-xs px-2.5 py-1 rounded-lg italic font-medium" style={{ background: "var(--bg-elevated)", color: "var(--text-secondary)" }}>{p}</span>
@@ -99,7 +100,7 @@ export default function InfectionDetail() {
       </Section>
 
       {/* Escalation */}
-      <Section title="Escalation" accent="red">
+      <Section title="Escalation" accent="red" icon={<ArrowUpIcon className="w-4 h-4 text-red-400" />}>
         <div className="space-y-1.5 mb-3">
           {infection.escalation.criteria.map((c, i) => (
             <div key={i} className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
@@ -113,7 +114,7 @@ export default function InfectionDetail() {
       </Section>
 
       {/* De-escalation */}
-      <Section title="De-escalation" accent="green">
+      <Section title="De-escalation" accent="green" icon={<ArrowDownIcon className="w-4 h-4 text-green-400" />}>
         <div className="space-y-1.5 mb-3">
           {infection.deescalation.criteria.map((c, i) => (
             <div key={i} className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>
@@ -127,7 +128,7 @@ export default function InfectionDetail() {
       </Section>
 
       {/* 中止基準 */}
-      <Section title="中止基準" accent="amber">
+      <Section title="中止基準" accent="amber" icon={<StopIcon className="w-4 h-4 text-amber-400" />}>
         <div className="space-y-1.5 mb-3">
           {infection.discontinuation.criteria.map((c, i) => (
             <div key={i} className="flex items-start gap-2 text-sm" style={{ color: "var(--text-secondary)" }}>

@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { infections } from "@/data/infections"
 import { antibiotics } from "@/data/antibiotics"
+import { CategoryIcon, RouteIcon } from "@/components/icons"
 
 const catAccent: Record<string, string> = {
   "呼吸器": "#3b82f6",
@@ -70,11 +71,11 @@ export default function Home() {
                 className="flex items-center gap-3 p-3 rounded-xl active:scale-[0.98] transition-transform"
                 style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}
               >
-                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded inline-flex items-center gap-1 ${
                   ab.route === "IV" ? "bg-blue-500/20 text-blue-400" :
                   ab.route === "PO" ? "bg-green-500/20 text-green-400" :
                   "bg-purple-500/20 text-purple-400"
-                }`}>{ab.route}</span>
+                }`}><RouteIcon route={ab.route} className="w-3 h-3" />{ab.route}</span>
                 <div className="flex-1 min-w-0">
                   <div className="font-semibold text-white text-sm truncate">{ab.name}</div>
                   <div className="text-xs truncate" style={{ color: "var(--text-muted)" }}>{ab.description}</div>
@@ -90,6 +91,7 @@ export default function Home() {
       {categories.map((cat) => (
         <div key={cat} className="mb-6">
           <div className="flex items-center gap-2 mb-2">
+            <CategoryIcon category={cat} className="w-4 h-4" />
             <div className="w-1 h-4 rounded-full" style={{ background: catAccent[cat] || "#6b7280" }} />
             <div className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>{cat}</div>
           </div>
